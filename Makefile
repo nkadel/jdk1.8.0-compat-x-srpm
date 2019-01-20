@@ -40,14 +40,14 @@ $(MOCKS):: verifyspec FORCE
 	else \
 		echo "	Building $@ RPMS with $(SPEC)"; \
 		rm -rf $@; \
-		mock -q -r $@ \
+		mock -q -r /etc/mock/$@.cfg \
 		    --resultdir=$(PWD)/$@ \
 		    --sources=$(PWD) --buildsrpm --spec=$(SPEC); \
 		echo "Storing $@/*.src.rpm in $@.rpm"; \
 		/bin/mv $@/*.src.rpm $@.src.rpm; \
 		echo "Actally building RPMS in $@"; \
 		rm -rf $@; \
-		mock -q -r $@ \
+		mock -q -r /etc/mock/$@.cfg \
 		     --resultdir=$(PWD)/$@ \
 		     $@.src.rpm; \
 	fi
